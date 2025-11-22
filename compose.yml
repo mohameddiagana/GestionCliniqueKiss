@@ -1,0 +1,9 @@
+services:
+  local-front:
+    image: gestioncliniquekissi:0.0.1
+    container_name: gestioncliniquekissi
+    ports:
+      - 4200:4200
+#    environment:
+#      POSTGRES_PASSWORD: diagana
+#docker compose up -d

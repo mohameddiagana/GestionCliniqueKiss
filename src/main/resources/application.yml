@@ -1,0 +1,8 @@
+#spring:
+#  profiles:
+#    active: prod
+##    application:
+##      security:
+##        jwt:
+##          secret-key:"6150645267556B58703273357638792F423F4528482B4D6251655468566D5971"
+#
