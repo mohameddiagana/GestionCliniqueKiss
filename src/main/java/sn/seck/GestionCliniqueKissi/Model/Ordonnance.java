@@ -7,12 +7,17 @@ import lombok.*;
 import java.util.Date;
 import java.util.UUID;
 
+import org.springframework.boot.actuate.audit.listener.AuditListener;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 @Entity
 @Data
 @Getter
 @Setter
 @ToString
 @Builder
+@EntityListeners(AuditingEntityListener.class)
 
 @Table(name = "ordonnance")
 
@@ -25,7 +30,8 @@ public class Ordonnance {
     @Column(nullable = false,name = "numOrdonnance",length = 100)
     private String numOrdonnance;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", timezone = "GMT")
-    @Column(name = "dateOrdonnance")
+    @Column(name = "dateOrdonnance", nullable =false)
+    @CreatedDate
     private Date dateOrdonnance;
     @Column(name = "formatOrdonnance",nullable = false)
     private String formatOrdonnance;

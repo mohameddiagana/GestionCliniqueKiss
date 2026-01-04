@@ -53,7 +53,7 @@ public class Patient implements Serializable {
     private String profession;
     @Column(name = "CIN", length = 250)
     private int CIN;
-    @Column(name = "age")
+    @Column(name = "age", nullable= false)
     private int age;
 
     @OneToMany(mappedBy = "patient" ,fetch = FetchType.EAGER)

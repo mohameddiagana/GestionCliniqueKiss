@@ -19,6 +19,7 @@ COPY --from=build /app/target/gestioncliniquekissi-*.jar gestioncliniquekissi.ja
 
 # Commande de lancement
 ENTRYPOINT ["java", "-jar", "gestioncliniquekissi.jar"]
+
 #En résumé : Un volume Docker est un mécanisme de stockage persistant
 #qui conserve les données même après l'arrêt ou la suppression d'un conteneur,
 #essentiel pour les applications nécessitant une persistance des données

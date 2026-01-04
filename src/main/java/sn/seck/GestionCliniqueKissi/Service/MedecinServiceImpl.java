@@ -28,13 +28,11 @@ public class MedecinServiceImpl implements MedecinService {
 
     @Override
     public Medecin addNewMedecin(Medecin medecin) {
-        //Medecin med = new Medecin();
         return medecinRepository.saveAndFlush(medecin);
     }
 
     @Override
     public Optional<Medecin> getMedecinById(long id) {
-       // return Optional.empty();
         return medecinRepository.findById(id);
     }
 

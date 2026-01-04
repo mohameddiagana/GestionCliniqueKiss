@@ -33,7 +33,6 @@ public class ConsultationController {
         model.addAttribute("consultation", new Consultation());
         model.addAttribute("patients", patientRepository.findAll());
         return "consultation_form";
-        //return consultationService.getAllConsultations();
     }
 
     @GetMapping("/{id}")

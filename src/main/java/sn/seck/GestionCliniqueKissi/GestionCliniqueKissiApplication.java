@@ -92,8 +92,8 @@ public class GestionCliniqueKissiApplication {
 			patient.setTel("14477858");
 			patient.setSexe("Homme");
 			patient.setDatenaissance(LocalDate.now());
-			patient.setAdresse("karack");
-			patient.setCIN(545122412);
+			patient.setAdresse("karack rue 20");
+			patient.setCIN(372417820);
 			patient.setAge(60);
 			patient.setRendezvous(new ArrayList<>());
 			patient.setHospitalisationslList(new ArrayList<>());
@@ -139,7 +139,6 @@ public class GestionCliniqueKissiApplication {
 					consu.setDateconsultation(new Date());
 					consu.setRapport("le Rapport de la semaine est.......:"+ consu.getRapport());
 					consu.setPatient(new Patient());
-					//consu.setPrixconsultation(150000);
 					consultationRepository.save(consu);
 
 					/* ADD HOSPITALISATION*/
@@ -177,7 +176,7 @@ public class GestionCliniqueKissiApplication {
 					ordonnance.setNumOrdonnance("Bv-2358-c30");
 					ordonnance.setDateOrdonnance(new Date());
 					ordonnance.setQuantite(40);
-					ordonnance.setFormatOrdonnance("orale");
+					ordonnance.setFormatOrdonnance("orale_basade");
 					ordonnance.setPrix(200);
 					ordonnance.setTotal(ordonnance.getTotal());
 					ordonnance.setMedecin(new Medecin());
