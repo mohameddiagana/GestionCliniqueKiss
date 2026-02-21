@@ -54,7 +54,7 @@
                         <td th:text="${p.rendezvous}"></td>
                         <td>
                             <a class="btn btn-primary"
-                               th:href="@{/api/v1/auth/patient/edit(idpatient=${p.idpatient})}">Edit
+                               th:href="@{/api/v1/auth/patients/edit(idpatient=${p.idpatient})}">Edit
                             </a>
 
                         </td>
@@ -62,7 +62,7 @@
                         <td>
                             <a class="btn btn-danger"
                                onclick="return confirm('Etes Vous Sure de vouloir supprimer ce Patient !!! ')"
-                               th:href="@{/api/v1/auth/patient/delete(idpatient=${p.idpatient})}">Supprimer</a>
+                               th:href="@{/api/v1/auth/patients/delete(idpatient=${p.idpatient})}">Supprimer</a>
                         </td>
                     </tr>
                     </tbody>
@@ -71,7 +71,7 @@
 
             <div class="panel-heading">Formulaire des Patient
                 <div class="panel-body">
-                    <form method="POST" th:action="@{/api/v1/auth/patient/add}" th:object="${Patient}">
+                    <form method="POST" th:action="@{/api/v1/auth/patients/add}" th:object="${Patient}">
 
                         <label> IdPatient :</label>
                         <input class="form-control" type="text" readonly th:field="*{idpatient}"/>

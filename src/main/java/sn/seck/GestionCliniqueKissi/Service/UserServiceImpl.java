@@ -3,6 +3,7 @@ package sn.seck.GestionCliniqueKissi.Service;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.transaction.Transactional;
 
+import jakarta.validation.Valid;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +33,12 @@ import java.util.Optional;
 @Getter
 @Setter
 public class UserServiceImpl implements UserService {
-
-    private BCryptPasswordEncoder passwordEncoder;
+        @Autowired
+    private  BCryptPasswordEncoder passwordEncoder;
 
     private UserRepository userRepository;
 
     public UserServiceImpl( UserRepository userRepository,BCryptPasswordEncoder passwordEncoder) {
-//
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Users getUserById(int iduser) {
-        log.info(new StringBuffer().append("getUserById").toString());
+        log.info("getUserById");
         return userRepository.getById(iduser);/*.orElseThrow(() -> new RuntimeException("User not found"));*/
 
         /**CORRECTION findbyid */
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
     @PostMapping("/users")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public Users save(@RequestBody Users user) {
+    public Users save(@RequestBody @Valid Users user) {
         if(!user.getEmail().contains("@")){
 
             throw new RuntimeException("votre mail est invalide !!!");
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("votre mail est invalide !!!");
         }
 
-        Optional<Users> userOpt = this.userRepository.findByEmail(user.getEmail());
+       Optional<Users> userOpt = this.userRepository.findByEmail(user.getEmail());
     /**
      * Verfier si l'utilisateur  est present dans la base
      * */

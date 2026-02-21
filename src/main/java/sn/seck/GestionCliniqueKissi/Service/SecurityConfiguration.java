@@ -4,13 +4,17 @@ import lombok.RequiredArgsConstructor;
 import org.apache.catalina.filters.CorsFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -38,20 +42,21 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
             httpSecurity
-                   // .cors(Customizer.withDefaults()) /** pour activer CORS*/
+                    .cors(Customizer.withDefaults()) /** pour activer CORS*/
                     .csrf(AbstractHttpConfigurer::disable)
-                    .formLogin(httpSecurityFormLoginConfigurer ->
-                            httpSecurityFormLoginConfigurer.loginPage("/login"))/*URL GET POUR AFFICHER LA PAGE*/
+                    .formLogin(form ->form
+                            .loginPage("/login"))/*URL GET POUR AFFICHER LA PAGE*/
                     .authorizeHttpRequests()
                     .requestMatchers(HttpMethod.POST, "/login", "/logout",
-                            "/RegisterRequest","http://localhost:8190/api/v1/auth/patient/liste").permitAll()
-                    .requestMatchers(GET, "/login").permitAll()
-                    .requestMatchers(GET,"/admin/**").hasAnyRole("ADMIN")
+                            "/RegisterRequest","/api/v1/auth/patients/liste").permitAll()
+                        //Roles
+                  //  .requestMatchers(HttpMethod.GET, "/login").permitAll()
+                    .requestMatchers(HttpMethod.GET,"/admin/**").hasAnyRole("ADMIN")
                     .requestMatchers("/users/**").hasAnyRole("COMPTABLE")
-                    .requestMatchers(HttpMethod.POST, "localhost:4200/"
-    //                 .requestMatchers(HttpMethod.POST,"http://localhost:8135/api/v1/auth/patient/liste")
-                            , "/swagger-ui.html", "/swagger-ui/**", "/v2/api-docs", " /v3/api-docs",
-                            "/swagger-resources", "/swagger-resources/**", "/v3/api-docs/**",
+                    .requestMatchers(HttpMethod.POST, "localhost:4200"
+                            // SWAGGER
+                            , "/swagger-ui.html", "/swagger-ui/**", "/v2/api-docs","/v3/api-docs",
+                            "/swagger-resources", "/swagger-resources/**","/v3/api-docs/**",
                             "/swagger-ui/**", "/configuration/security/**")
                         .permitAll()
 
@@ -70,32 +75,28 @@ public class SecurityConfiguration {
                                         SecurityContextHolder.clearContext())
                 );
                           return httpSecurity.build();
+
+        }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     /**
      * une methode pour securise le CROSS Origine request sharing(CORS)
      */
     @Bean
-    public CorsFilter corsFilter() {
+    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-
-        // Autorise l'origine (frontend)
-        config.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-
-        // Méthodes autorisées
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-
-        // En-têtes autorisés
-        config.setAllowedHeaders(Arrays.asList("*"));
-
-        // Autorise l'envoi de cookies (credentials)
+        config.setAllowedOrigins(List.of("http://localhost:4200"));
+        config.setAllowedMethods(List.of("*"));
+        config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
 
-        // Applique la config à toutes les URLs
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
-
-        return new CorsFilter();
+        return source;
     }
 
 

@@ -18,7 +18,7 @@ public class Consultation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "codecons",length = 150)
+    @Column(name = "codecons",length = 150 , nullable = false)
     private String codecons;
     @Temporal(TemporalType.DATE)    /*par defaut TIMESTAm*/
     private Date dateconsultation;

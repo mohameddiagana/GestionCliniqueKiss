@@ -2,7 +2,6 @@ package sn.seck.GestionCliniqueKissi.Model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -31,25 +30,25 @@ public class Patient implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idpatient;
-    @Column(name = "codep", length = 200)
+    @Column(name = "codep", length = 10, nullable = false)
     private int codep;
-    @Column(name = "nomp" ,length = 200)
+    @Column(name = "nomp" ,length = 80)
     private String nomp;
-    @Column(name = "prenom", length = 200)
+    @Column(name = "prenom", length = 90)
     private String prenom;
-    @Column(name = "email", length = 200)
+    @Column(name = "email", length = 150)
     private String email;
-    @Column(name = "tel",length = 200)
+    @Column(name = "tel",length = 80)
     private String tel;
-    @Column(name = "sexe", length = 200)
+    @Column(name = "sexe", length = 10)
     private String sexe;
     @Column(name = "datenaissance")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", timezone = "GMT")
     @CreatedDate
     private LocalDate datenaissance;
-    @Column(name = "adresse", length = 200)
+    @Column(nullable = false, length = 80)
     private String adresse;
-    @Column(name = "profession", length = 200)
+    @Column(name = "profession", length = 80 , nullable = false)
     private String profession;
     @Column(name = "CIN", length = 250)
     private int CIN;

@@ -21,6 +21,7 @@ run unit tests and package:
   stage: packaging
   script:
     - mvn clean package -DskipTests
+#    - mvn clean package -P dev
   artifacts:
     paths:
       - GestionCliniqueKissi/target/*.jar

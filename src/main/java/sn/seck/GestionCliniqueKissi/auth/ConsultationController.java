@@ -10,7 +10,7 @@ import sn.seck.GestionCliniqueKissi.Service.ConsultationService;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "http://localhost:8190/api/v1/auth/consultations")
+@RequestMapping(path = "http://localhost:8190/api/v1/auth/consultation")
 @CrossOrigin(origins = "http://localhost:4200")
 
 /**
@@ -18,7 +18,6 @@ import java.util.List;
  * */
 public class ConsultationController {
 
-//    @Autowired
     private ConsultationService consultationService;
     private  final PatientRepository patientRepository;
 

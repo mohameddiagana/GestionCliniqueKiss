@@ -18,13 +18,12 @@ public class UserController {
    // @Autowired
     private UserRepository userRepository;
 
-    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder, BCryptPasswordEncoder passwordEncoder1) {
+    public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     // Créer un nouvel utilisateur
     @PostMapping("/users")
-
     public Users save(@RequestBody Users user) {
         log.info("save user",user.getFirstname(),user.getLastname());
         return userRepository.save(user);
@@ -39,14 +38,14 @@ public class UserController {
             user.setRole(newRole);
             return userRepository.saveAndFlush(user);
         }
-        return null;  // ou gestion d'erreur
+        return null;  // ou cas d'erreur
     }
 
-    @GetMapping("/{iduser}")
-    public Optional<Users> getUserById(@PathVariable int iduser) {
-        log.info("getUser {} in the database", iduser);
-        return userRepository.findById(iduser);
-    }
+//    @GetMapping("/{iduser}")
+//    public Optional<Users> getUserById(@PathVariable int iduser) {
+//        log.info("getUser {} in the database", iduser);
+//        return userRepository.findById(iduser);
+//    }
 
     @GetMapping
     public List<Users> getAllUsers() {

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import sn.seck.GestionCliniqueKissi.Model.Users;
 
 @RestController
-@RequestMapping(path = "localhost:7075/api/v1/auth/register")
+@RequestMapping(path = "localhost:8190/api/v1/auth/register")
 @CrossOrigin(origins = "*")
 public class InscriptionController {
     private  static final Logger log = LoggerFactory.getLogger(InscriptionController.class);

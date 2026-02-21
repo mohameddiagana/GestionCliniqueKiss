@@ -50,7 +50,7 @@ public class OrdonnanceService {
             ordonnance.setTotal(updated.getTotal());
             ordonnance.setMedecin(new Medecin());
             return ordonnanceRepository.saveAndFlush(ordonnance);
-        }).orElseThrow(() -> new RuntimeException("Ordonnance not found in the database"));
+        }).orElseThrow(() -> new RuntimeException("Sorry Ordonnance not found in the database"));
     }
 
 }

@@ -11,6 +11,7 @@ import sn.seck.GestionCliniqueKissi.Repository.MedecinRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @Slf4j
@@ -32,7 +33,7 @@ public class MedecinServiceImpl implements MedecinService {
     }
 
     @Override
-    public Optional<Medecin> getMedecinById(long id) {
+    public Optional<Medecin> getMedecinById(Long id) {
         return medecinRepository.findById(id);
     }
 
@@ -44,7 +45,8 @@ public class MedecinServiceImpl implements MedecinService {
     }
 
     @Override
-    public void deleteMedecinById(long id) {
-    medecinRepository.deleteById(id);
+    public void deleteMedecinById(Long id) {
+        medecinRepository.deleteById(id);
     }
+
 }

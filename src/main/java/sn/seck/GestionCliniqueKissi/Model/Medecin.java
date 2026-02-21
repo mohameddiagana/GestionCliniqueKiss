@@ -6,6 +6,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -19,7 +20,7 @@ import java.util.List;
 public class Medecin implements Serializable {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(name = "codemed",length = 200)
     private String codemed;
     @Column(name = "firstname",length = 200)
@@ -30,7 +31,7 @@ public class Medecin implements Serializable {
     private String email;
     @Column(name = "tele",length = 200)
     private String tele;
-    @Column(name ="sexe", length = 200)
+    @Column(name ="sexe")
     private String sexe;
 
     @OneToMany(mappedBy = "medecin",fetch = FetchType.LAZY)

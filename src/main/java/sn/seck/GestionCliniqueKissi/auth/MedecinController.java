@@ -2,20 +2,20 @@ package sn.seck.GestionCliniqueKissi.auth;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sn.seck.GestionCliniqueKissi.Model.Medecin;
 import sn.seck.GestionCliniqueKissi.Service.MedecinService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("http://localhost:8190/api/v1/auth/medecins")
 @CrossOrigin(origins = "http://localhost:4200")
 @Slf4j
 public class MedecinController {
-    @Autowired
+   @Autowired
     private  MedecinService medecinService;
 
     public MedecinController(MedecinService medecinService) {
@@ -51,9 +51,10 @@ public class MedecinController {
      * suppression Id MEdein
      * */
 
+
     @DeleteMapping("/{id}")
     public void deleteMedecin(@PathVariable Long id) {
-        log.info("deleteMedecin {} in the database", id);
+        log.info("deleteMedecin",id);
         medecinService.deleteMedecinById(id);
     }
 }

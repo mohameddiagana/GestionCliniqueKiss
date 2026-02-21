@@ -15,6 +15,7 @@ public class MedicamentService {
     @Autowired
     private MedicamentRepository medicamentRepository;
 
+
     public MedicamentService(MedicamentRepository medicamentRepository) {
         this.medicamentRepository = medicamentRepository;
     }

@@ -1,6 +1,7 @@
 package sn.seck.GestionCliniqueKissi.Model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -33,9 +34,10 @@ public class Users implements UserDetails {
 
     private String lastname;
     @Column(name = "email",length = 250)
+    @NotBlank(message = "Email obligatoire")
     private String email;
     @Column(name = "password",length = 100)
-    @NotNull(message = "Password cannot be null")
+    @NotBlank(message = "Mot de passe obligatoire")
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;

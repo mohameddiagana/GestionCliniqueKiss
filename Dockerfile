@@ -11,11 +11,12 @@ RUN mvn clean package -DskipTests
 
 # Étape 2 : Image finale (plus légère)
 #FROM eclipse-temurin:17-jre AS run
-FROM openjdk:17-jdk-alpine
+#FROM openjdk:17-jdk-alpine
+FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 
 # Copier le jar généré depuis l’étape de build
-COPY --from=build /app/target/gestioncliniquekissi-*.jar gestioncliniquekissi.jar
+COPY --from=build /app/target/gestioncdockeliniquekissi-*.jar gestioncliniquekissi.jar
 
 # Commande de lancement
 ENTRYPOINT ["java", "-jar", "gestioncliniquekissi.jar"]

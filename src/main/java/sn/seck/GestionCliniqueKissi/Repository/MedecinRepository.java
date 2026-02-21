@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import sn.seck.GestionCliniqueKissi.Model.Medecin;
 
+import java.util.UUID;
+
 @Repository
 @CrossOrigin("*")
 public interface MedecinRepository extends JpaRepository<Medecin, Long> {

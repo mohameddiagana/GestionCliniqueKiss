@@ -3,10 +3,12 @@ package sn.seck.GestionCliniqueKissi;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -36,37 +38,36 @@ import java.util.stream.Stream;
 public class GestionCliniqueKissiApplication {
 
 	private static final Logger logger = LoggerFactory.getLogger(GestionCliniqueKissiApplication.class);
-		private UserRepository userRepository;
+	private UserRepository userRepository;
+	//private  PatientService patientService;
 
-		private PatientService patientService;
-		private  MedecinRepository medecinRepository;
+	private  MedecinRepository medecinRepository;
 		private RendezvousRepository rendezvousRepository;
 		private ConsultationRepository consultationRepository;
 		private PatientRepository patientRepository;
-//		private HospitalisationService hospitalisationService;
 	private MedicamentRepository medicamentRepository;
 	private OrdonnanceRepository ordonnanceRepository;
 
 	private HospitalisationRepository hospitalisationRepository;
 	public GestionCliniqueKissiApplication(MedecinRepository medecinRepository,
                                            UserRepository userRepository,
-                                           PatientService patientService, RendezvousRepository rendezvousRepository, ConsultationRepository consultationRepository, PatientRepository patientRepository, HospitalisationService hospitalisationService, MedicamentRepository medicamentRepository, OrdonnanceRepository ordonnanceRepository, HospitalisationRepository hospitalisationRepository) {
+                                           RendezvousRepository rendezvousRepository, ConsultationRepository consultationRepository, PatientRepository patientRepository,MedicamentRepository medicamentRepository, OrdonnanceRepository ordonnanceRepository, HospitalisationRepository hospitalisationRepository) {
         this.userRepository = userRepository;
-		this.patientService = patientService;
-		this.medecinRepository = medecinRepository;
+        this.medecinRepository = medecinRepository;
 
         this.rendezvousRepository = rendezvousRepository;
         this.consultationRepository = consultationRepository;
         this.patientRepository = patientRepository;
+       // this.patientService = patientService;
         this.medicamentRepository = medicamentRepository;
         this.ordonnanceRepository = ordonnanceRepository;
-//        this.hospitalisationService = hospitalisationService;
         this.hospitalisationRepository = hospitalisationRepository;
     }
 
 	public static void main(String[] args) {
 		SpringApplication.run(GestionCliniqueKissiApplication.class, args);
 	}
+
 
 	@Bean
 	CommandLineRunner start( ) {
@@ -86,10 +87,10 @@ public class GestionCliniqueKissiApplication {
 			patient.setIdpatient(1);
 			patient.setCodep(223547);
 			patient.setNomp("malixk");
-			patient.setPrenom("diiaa");
+			patient.setPrenom("Boda");
 			patient.setProfession("IT");
-			patient.setEmail("MOHAmed bocar");
-			patient.setTel("14477858");
+			patient.setEmail("MOHAmed@gmail.com");
+			patient.setTel("87215481");
 			patient.setSexe("Homme");
 			patient.setDatenaissance(LocalDate.now());
 			patient.setAdresse("karack rue 20");
@@ -107,7 +108,7 @@ public class GestionCliniqueKissiApplication {
 		Stream.of("Bocar", "zeyade", "BRAHIME", "youssouf")
 				.forEach(name -> {
 					Medecin medecin = new Medecin();
-					medecin.setId(1);
+					medecin.setId(1L);
 					medecin.setCodemed("m002");
 					medecin.setFirstname("yacoub");
 					medecin.setLastname("Diagana ");
@@ -141,6 +142,13 @@ public class GestionCliniqueKissiApplication {
 					consu.setPatient(new Patient());
 					consultationRepository.save(consu);
 
+					consu.setId(8);
+					consu.setCodecons("C88r8");
+					consu.setDateconsultation(new Date());
+					consu.setRapport("le Rapport de la semaine");
+					consu.setPatient(new Patient());
+					consultationRepository.save(consu);
+
 					/* ADD HOSPITALISATION*/
 					Hospitalisation hosp = new Hospitalisation();
 					hosp.setId_hospitalisation(hosp.getId_hospitalisation());
@@ -159,7 +167,7 @@ public class GestionCliniqueKissiApplication {
 					med.setIdmed(UUID.randomUUID());
 					med.setLibelle_medicament("Doliprane");
 					med.setQuantite_medicament(10);
-					med.setMedecin(new Medecin());
+					med.setMedecin(medecin);
 					medicamentRepository.saveAndFlush(med);
 					/** INSTACIATION TABLE ORDONNANCE*/
 
